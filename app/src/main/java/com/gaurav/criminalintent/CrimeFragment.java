@@ -21,6 +21,7 @@ import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
+    private static final String DIALOG_DATE = "DialogDate";
     private Crime cCrime;
     private EditText cTitleField;
     private Button cDateButton;
@@ -70,7 +71,12 @@ public class CrimeFragment extends Fragment {
 
         cDateButton = v.findViewById(R.id.crime_date);
         cDateButton.setText(cCrime.getcDate().toString());
-        //cDateButton.setClickable(false);
+        cDateButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerFragment().show(getActivity().getSupportFragmentManager(), DIALOG_DATE);
+            }
+        });
 
         cSolvedCheckBox = v.findViewById(R.id.is_crime_solved);
         cSolvedCheckBox.setChecked(cCrime.iscSolved());
