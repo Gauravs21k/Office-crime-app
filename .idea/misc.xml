@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_crime_pager.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_fragment.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/dialog_date.xml" value="0.12" />
         <entry key="app/src/main/res/layout/fragment_crime.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_crime_list.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/list_crime_item.xml" value="0.23854166666666668" />
