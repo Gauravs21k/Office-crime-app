@@ -45,8 +45,7 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
         mTitleField = v.findViewById(R.id.crime_title);
@@ -74,10 +73,9 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment
-                        .newInstance(cCrime.getcDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
-                dialog.show(fragmentManager, DIALOG_DATE);
+                DatePickerFragment datePickerDialog = DatePickerFragment.newInstance(cCrime.getcDate());
+                datePickerDialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                datePickerDialog.show(fragmentManager, DIALOG_DATE);
             }
         });
 
@@ -85,8 +83,7 @@ public class CrimeFragment extends Fragment {
         cSolvedCheckbox.setChecked(cCrime.iscSolved());
         cSolvedCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 cCrime.setcSolved(isChecked);
             }
         });
@@ -101,8 +98,7 @@ public class CrimeFragment extends Fragment {
         }
 
         if (requestCode == REQUEST_DATE) {
-            Date date = (Date) data
-                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             cCrime.setcDate(date);
             updateDate();
         }
