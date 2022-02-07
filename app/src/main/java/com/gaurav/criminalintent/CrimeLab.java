@@ -13,13 +13,10 @@ public class CrimeLab {
 
     private CrimeLab(Context context) {
         cCrimes = new ArrayList<>();
-        for (int i = 0; i<100; i++){
-            Crime crime = new Crime();
-            crime.setcTitle("Crime #"+i);
-            crime.setcSolved(new Random().nextInt()%2 ==0);
-            crime.setcRequiresPolice(i%2==0);
-            cCrimes.add(crime);
-        }
+    }
+
+    public void addCrime(Crime crime) {
+        cCrimes.add(crime);
     }
 
     public List<Crime> getcCrimes(){
