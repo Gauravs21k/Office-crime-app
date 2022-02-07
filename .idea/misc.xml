@@ -8,15 +8,16 @@
         <entry key="app/src/main/res/layout/activity_fragment.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/dialog_date.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_crime.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_crime.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_crime_list.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/list_crime_item.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/list_item_crime.xml" value="0.25" />
         <entry key="app/src/main/res/layout/serious_list_item_crime.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/fragment_crime_list.xml" value="0.18" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
