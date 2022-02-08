@@ -22,6 +22,7 @@ import java.text.DateFormat;
 import java.util.List;
 
 public class CrimeListFragment extends Fragment {
+    private static final String SAVED_SUBTITLE_VISIBLE = "saved_subtitle_visible";
     private RecyclerView cCrimeRecyclerView;
     private CrimeAdapter cAdapter;
     private int position;
@@ -84,7 +85,16 @@ public class CrimeListFragment extends Fragment {
         cCrimeRecyclerView = view.findViewById(R.id.crime_recycler_view);
         cCrimeRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         updateUI();
+        if (savedInstanceState != null) {
+            cSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+        }
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, cSubtitleVisible);
     }
 
     @Override
