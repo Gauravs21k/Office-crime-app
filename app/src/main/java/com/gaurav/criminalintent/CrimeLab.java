@@ -36,4 +36,12 @@ public class CrimeLab {
             sCrimeLab = new CrimeLab(context);
         return sCrimeLab;
     }
+
+    public void deleteCrime(Crime cCrime) {
+        for (Crime crime: cCrimes) {
+            if (crime.equals(cCrime)) {
+                cCrimes.remove(cCrime);
+            }
+        }
+    }
 }
