@@ -34,7 +34,7 @@ public class CrimePagerActivity extends AppCompatActivity {
         cViewPager2 = findViewById(R.id.crime_view_pager2);
         cCrimes = CrimeLab.get(this).getcCrimes();
 
-        cViewPager2.setAdapter(new FragmentStateAdapter(getSupportFragmentManager(),getLifecycle()) {
+        cViewPager2.setAdapter(new FragmentStateAdapter(getSupportFragmentManager(), getLifecycle()) {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
@@ -47,13 +47,13 @@ public class CrimePagerActivity extends AppCompatActivity {
             }
         });
 
-       /* for (int i = 0; i < cCrimes.size(); i++) {
+        for (int i = 0; i < cCrimes.size(); i++) {
             if (cCrimes.get(i).getcId().equals(crimeId)) {
                 cViewPager2.setCurrentItem(i);
                 break;
             }
-        }*/
+        }
 
-        cViewPager2.setCurrentItem(cCrimes.indexOf(CrimeLab.get(this).getCrime(crimeId)));
+        //cViewPager2.setCurrentItem(cCrimes.indexOf(CrimeLab.get(this).getCrime(crimeId)));
     }
 }

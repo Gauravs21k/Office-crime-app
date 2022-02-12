@@ -110,6 +110,7 @@ public class CrimeListFragment extends Fragment {
             cAdapter = new CrimeAdapter(crimes);
             cCrimeRecyclerView.setAdapter(cAdapter);
         } else {
+            cAdapter.setCrimes(crimes);
             cAdapter.notifyItemChanged(position);
         }
         updateSubtitle();
@@ -128,8 +129,6 @@ public class CrimeListFragment extends Fragment {
             cDateTextView = itemView.findViewById(R.id.crime_date);
             cSolvedImageView = itemView.findViewById(R.id.crime_solved);
         }
-
-
 
         @Override
         public void onClick(View view) {
@@ -208,6 +207,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return cCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            cCrimes = crimes;
         }
 
         @Override

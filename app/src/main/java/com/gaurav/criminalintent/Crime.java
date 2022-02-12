@@ -11,7 +11,12 @@ public class Crime {
     private boolean cRequiresPolice;
 
     public Crime() {
-        cId = UUID.randomUUID();
+        this(UUID.randomUUID());
+
+    }
+
+    public Crime(UUID id) {
+        cId = id;
         cDate = new Date();
     }
 
@@ -49,5 +54,9 @@ public class Crime {
 
     public void setcSolved(boolean cSolved) {
         this.cSolved = cSolved;
+    }
+
+    public Boolean getcRequirePolice() {
+        return null;
     }
 }

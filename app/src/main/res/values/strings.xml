@@ -13,4 +13,5 @@
     </plurals>
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="delete_crime">Delete Crime</string>
+    <string name="require_police">require_police</string>
 </resources>
