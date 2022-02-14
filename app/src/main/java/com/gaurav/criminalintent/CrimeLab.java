@@ -10,6 +10,7 @@ import com.gaurav.criminalintent.database.CrimeCursorWrapper;
 import com.gaurav.criminalintent.database.CrimeDBSchema;
 import com.gaurav.criminalintent.database.CrimeDBSchema.CrimeTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -109,5 +110,10 @@ public class CrimeLab {
                 CrimeTable.Cols.UUID + "=?",
                 new String[] {uuidString});
 
+    }
+
+    public File getPhotoFile(Crime crime) {
+        File fileDir = cContext.getFilesDir();
+        return  new File(fileDir, crime.getPhotoFileName());
     }
 }
