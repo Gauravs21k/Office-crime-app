@@ -9,6 +9,7 @@ public class Crime {
     private Date cDate;
     private boolean cSolved;
     private boolean cRequiresPolice;
+    private String cSuspect;
 
     public Crime() {
         this(UUID.randomUUID());
@@ -20,43 +21,49 @@ public class Crime {
         cDate = new Date();
     }
 
-    public boolean iscRequiresPolice() {
-        return cRequiresPolice;
-    }
 
-    public void setcRequiresPolice(boolean cRequiresPolice) {
-        this.cRequiresPolice = cRequiresPolice;
-    }
 
-    public UUID getcId() {
+    public UUID getId() {
         return cId;
     }
 
-    public String getcTitle() {
+    public String getTitle() {
         return cTitle;
     }
 
-    public void setcTitle(String cTitle) {
+    public void setTitle(String cTitle) {
         this.cTitle = cTitle;
     }
 
-    public Date getcDate() {
+    public Date getDate() {
         return cDate;
     }
 
-    public void setcDate(Date cDate) {
+    public void setDate(Date cDate) {
         this.cDate = cDate;
     }
 
-    public boolean iscSolved() {
+    public boolean isSolved() {
         return cSolved;
     }
 
-    public void setcSolved(boolean cSolved) {
+    public void setSolved(boolean cSolved) {
         this.cSolved = cSolved;
     }
 
-    public Boolean getcRequirePolice() {
-        return null;
+    public boolean isRequiresPolice() {
+        return cRequiresPolice;
+    }
+
+    public void setRequiresPolice(boolean cRequiresPolice) {
+        this.cRequiresPolice = cRequiresPolice;
+    }
+
+    public String getSuspect() {
+        return cSuspect;
+    }
+
+    public void setSuspect(String cSuspect) {
+        this.cSuspect = cSuspect;
     }
 }

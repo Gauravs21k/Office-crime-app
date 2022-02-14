@@ -17,7 +17,6 @@ import java.util.UUID;
 
 public class CrimeLab {
     private static CrimeLab sCrimeLab;
-    private List<Crime> cCrimes;
     private Context cContext;
     private SQLiteDatabase cDatabase;
 
@@ -32,7 +31,7 @@ public class CrimeLab {
         cDatabase.insert(CrimeTable.NAME, null, contentValues);
     }
 
-    public List<Crime> getcCrimes() {
+    public List<Crime> getCrimes() {
         List<Crime> crimes = new ArrayList<>();
         CrimeCursorWrapper cursor = queryCrimes(null, null);
 
@@ -67,7 +66,7 @@ public class CrimeLab {
     }
 
     public void updateCrime(Crime crime) {
-        String uuidString = crime.getcId().toString();
+        String uuidString = crime.getId().toString();
         ContentValues contentValues = getContentValues(crime);
         cDatabase.update(CrimeTable.NAME, contentValues,
                 CrimeTable.Cols.UUID + "=?",
@@ -88,11 +87,12 @@ public class CrimeLab {
 
     private static ContentValues getContentValues(Crime crime) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CrimeTable.Cols.UUID, crime.getcId().toString());
-        contentValues.put(CrimeTable.Cols.TITLE, crime.getcTitle());
-        contentValues.put(CrimeTable.Cols.DATE, crime.getcDate().toString());
-        contentValues.put(CrimeTable.Cols.REQUIRE_POLICE, crime.getcRequirePolice());
-        contentValues.put(CrimeTable.Cols.SOLVED, crime.iscSolved());
+        contentValues.put(CrimeTable.Cols.UUID, crime.getId().toString());
+        contentValues.put(CrimeTable.Cols.TITLE, crime.getTitle());
+        contentValues.put(CrimeTable.Cols.DATE, crime.getDate().toString());
+        contentValues.put(CrimeTable.Cols.REQUIRE_POLICE, crime.isRequiresPolice());
+        contentValues.put(CrimeTable.Cols.SOLVED, crime.isSolved());
+        contentValues.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
 
         return contentValues;
     }
@@ -104,8 +104,7 @@ public class CrimeLab {
     }
 
     public void deleteCrime(Crime crime) {
-        String uuidString = crime.getcId().toString();
-        ContentValues contentValues = getContentValues(crime);
+        String uuidString = crime.getId().toString();
         cDatabase.delete(CrimeTable.NAME,
                 CrimeTable.Cols.UUID + "=?",
                 new String[] {uuidString});

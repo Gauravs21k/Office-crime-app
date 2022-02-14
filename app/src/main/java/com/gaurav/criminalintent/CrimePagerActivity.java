@@ -32,13 +32,13 @@ public class CrimePagerActivity extends AppCompatActivity {
         UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
         cViewPager2 = findViewById(R.id.crime_view_pager2);
-        cCrimes = CrimeLab.get(this).getcCrimes();
+        cCrimes = CrimeLab.get(this).getCrimes();
 
         cViewPager2.setAdapter(new FragmentStateAdapter(getSupportFragmentManager(), getLifecycle()) {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
-                return CrimeFragment.newInstance(cCrimes.get(position).getcId());
+                return CrimeFragment.newInstance(cCrimes.get(position).getId());
             }
 
             @Override
@@ -48,7 +48,7 @@ public class CrimePagerActivity extends AppCompatActivity {
         });
 
         for (int i = 0; i < cCrimes.size(); i++) {
-            if (cCrimes.get(i).getcId().equals(crimeId)) {
+            if (cCrimes.get(i).getId().equals(crimeId)) {
                 cViewPager2.setCurrentItem(i);
                 break;
             }

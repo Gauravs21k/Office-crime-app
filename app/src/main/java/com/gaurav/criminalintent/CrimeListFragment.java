@@ -53,7 +53,7 @@ public class CrimeListFragment extends Fragment {
             case R.id.new_crime:
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
-                Intent intent = CrimePagerActivity.newIntent(getActivity(),crime.getcId());
+                Intent intent = CrimePagerActivity.newIntent(getActivity(),crime.getId());
                 startActivity(intent);
                 return true;
             case R.id.show_subtitle:
@@ -68,7 +68,7 @@ public class CrimeListFragment extends Fragment {
 
     public void updateSubtitle() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
-        int crimeCount = crimeLab.getcCrimes().size();
+        int crimeCount = crimeLab.getCrimes().size();
         String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeCount, crimeCount);
         if (!cSubtitleVisible) {
             subtitle = null;
@@ -105,7 +105,7 @@ public class CrimeListFragment extends Fragment {
 
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getcCrimes();
+        List<Crime> crimes = crimeLab.getCrimes();
         if (cAdapter==null) {
             cAdapter = new CrimeAdapter(crimes);
             cCrimeRecyclerView.setAdapter(cAdapter);
@@ -134,14 +134,14 @@ public class CrimeListFragment extends Fragment {
         public void onClick(View view) {
             //Toast.makeText(getActivity(), cCrime.getcTitle()+" clicked", Toast.LENGTH_SHORT).show();
             position = getAdapterPosition();
-            startActivity(CrimePagerActivity.newIntent(getActivity(),cCrime.getcId()));
+            startActivity(CrimePagerActivity.newIntent(getActivity(),cCrime.getId()));
         }
 
         public void bind(Crime crime) {
             this.cCrime = crime;
-            cTitleTextView.setText(crime.getcTitle());
-            cDateTextView.setText(DateFormat.getDateInstance().format(crime.getcDate()));
-            cSolvedImageView.setVisibility(cCrime.iscSolved() ? View.VISIBLE :View.GONE);
+            cTitleTextView.setText(crime.getTitle());
+            cDateTextView.setText(DateFormat.getDateInstance().format(crime.getDate()));
+            cSolvedImageView.setVisibility(cCrime.isSolved() ? View.VISIBLE :View.GONE);
         }
     }
 
@@ -159,15 +159,15 @@ public class CrimeListFragment extends Fragment {
 
         public void bind(Crime crime) {
             this.cCrime = crime;
-            cTitleTextView.setText(crime.getcTitle());
-            cDateTextView.setText(DateFormat.getDateInstance().format(crime.getcDate()));
+            cTitleTextView.setText(crime.getTitle());
+            cDateTextView.setText(DateFormat.getDateInstance().format(crime.getDate()));
         }
 
         @Override
         public void onClick(View view) {
             //Toast.makeText(getActivity(), "serious" +cCrime.getcTitle()+" clicked", Toast.LENGTH_SHORT).show();
             position = getAdapterPosition();
-            startActivity(CrimePagerActivity.newIntent(getActivity(), cCrime.getcId()));
+            startActivity(CrimePagerActivity.newIntent(getActivity(), cCrime.getId()));
         }
     }
 
@@ -216,7 +216,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemViewType(int position) {
             Crime crime = cCrimes.get(position);
-            if (crime.iscRequiresPolice())
+            if (crime.isRequiresPolice())
                 return 0;
             else
                 return 1;

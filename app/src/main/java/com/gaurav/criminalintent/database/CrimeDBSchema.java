@@ -10,6 +10,7 @@ public class CrimeDBSchema {
             public static final String DATE = "date";
             public static final String REQUIRE_POLICE = "require_police";
             public static final String SOLVED = "solved";
+            public static final String SUSPECT = "suspect";
         }
     }
 }
