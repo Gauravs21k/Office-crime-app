@@ -192,6 +192,7 @@ public class CrimeFragment extends Fragment {
 
             };
         });
+        updatePhotoView();
 
         return v;
     }
@@ -249,10 +250,24 @@ public class CrimeFragment extends Fragment {
                 cursor.close();
 
             }
+        } else if (requestCode == REQUEST_PHOTO) {
+            Uri uri = FileProvider.getUriForFile(getActivity(),
+                    "com.gaurav.criminalintent.fileprovider", cPhotoFile);
+            getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+            updatePhotoView();
         }
     }
 
     private void updateDate() {
         cDateButton.setText(cCrime.getDate().toString());
+    }
+
+    private void updatePhotoView() {
+        if (cPhotoFile == null || !cPhotoFile.exists()) {
+            cPhotoView.setImageBitmap(null);
+        } else {
+            cPhotoView.setImageBitmap(PictureUtils.getScaledBitmap(cPhotoFile.getPath(), getActivity()));
+        }
     }
 }
