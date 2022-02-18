@@ -1,5 +1,6 @@
 package com.gaurav.criminalintent;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +28,17 @@ public class CrimeListFragment extends Fragment {
     private CrimeAdapter cAdapter;
     private int position;
     private boolean cSubtitleVisible;
+    private Callbacks cCallback;
+
+    public interface Callbacks {
+        void onCrimeSelected(Crime crime);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        cCallback = (Callbacks) context;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +65,8 @@ public class CrimeListFragment extends Fragment {
             case R.id.new_crime:
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
-                Intent intent = CrimePagerActivity.newIntent(getActivity(),crime.getId());
-                startActivity(intent);
+                updateUI();
+                cCallback.onCrimeSelected(crime);
                 return true;
             case R.id.show_subtitle:
                 cSubtitleVisible = !cSubtitleVisible;
@@ -98,6 +110,12 @@ public class CrimeListFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        cCallback = null;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         updateUI();
@@ -132,9 +150,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            //Toast.makeText(getActivity(), cCrime.getcTitle()+" clicked", Toast.LENGTH_SHORT).show();
             position = getAdapterPosition();
-            startActivity(CrimePagerActivity.newIntent(getActivity(),cCrime.getId()));
+            cCallback.onCrimeSelected(cCrime);
         }
 
         public void bind(Crime crime) {
@@ -167,7 +184,7 @@ public class CrimeListFragment extends Fragment {
         public void onClick(View view) {
             //Toast.makeText(getActivity(), "serious" +cCrime.getcTitle()+" clicked", Toast.LENGTH_SHORT).show();
             position = getAdapterPosition();
-            startActivity(CrimePagerActivity.newIntent(getActivity(), cCrime.getId()));
+            cCallback.onCrimeSelected(cCrime);
         }
     }
 
