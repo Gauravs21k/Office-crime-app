@@ -3,6 +3,7 @@ package com.gaurav.criminalintent;
 import static android.widget.CompoundButton.OnCheckedChangeListener;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -52,6 +53,17 @@ public class CrimeFragment extends Fragment {
     private ImageButton cPhotoButton;
     private ImageView cPhotoView;
     private File cPhotoFile;
+    private  Callbacks cCallbacks;
+
+    public interface Callbacks {
+        void onCrimeUpdated(Crime crime);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        cCallbacks = (CrimeFragment.Callbacks) context;
+    }
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -75,6 +87,12 @@ public class CrimeFragment extends Fragment {
     public void onPause() {
         super.onPause();
         CrimeLab.get(getActivity()).updateCrime(cCrime);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        cCallbacks = null;
     }
 
     @Override
@@ -111,6 +129,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 cCrime.setTitle(s.toString());
+                updateCrime();
             }
 
             @Override
@@ -137,8 +156,10 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 cCrime.setSolved(isChecked);
+                updateCrime();
             }
         });
+
 
         cReportButton = v.findViewById(R.id.crime_report);
         cReportButton.setOnClickListener(new View.OnClickListener() {
@@ -227,6 +248,7 @@ public class CrimeFragment extends Fragment {
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             cCrime.setDate(date);
+            updateCrime();
             updateDate();
         } else if (requestCode == REQUEST_CONTACT && data != null) {
             Uri contactUri = data.getData();
@@ -245,6 +267,7 @@ public class CrimeFragment extends Fragment {
                 cursor.moveToFirst();
                 String suspect = cursor.getString(0);
                 cCrime.setSuspect(suspect);
+                updateCrime();
                 cSuspectButton.setText(suspect);
             } finally{
                 cursor.close();
@@ -254,9 +277,14 @@ public class CrimeFragment extends Fragment {
             Uri uri = FileProvider.getUriForFile(getActivity(),
                     "com.gaurav.criminalintent.fileprovider", cPhotoFile);
             getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
+            updateCrime();
             updatePhotoView();
         }
+    }
+
+    private void updateCrime() {
+        CrimeLab.get(getActivity()).updateCrime(cCrime);
+        cCallbacks.onCrimeUpdated(cCrime);
     }
 
     private void updateDate() {
